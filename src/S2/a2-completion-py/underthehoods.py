@@ -8,9 +8,6 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 user_prompt = "Write a small tweet for twitter; on my Dosa Center. 1001 varities, home made spices, butter, and lots of love. I need 5 tweets."
 
-# user_prompt = "gpt-35-turbo-dev-001"
-# engine="text-davinci-003-dev-0109",
-
 response = openai.Completion.create(
   engine="gpt-35-turbo-dev-001",
   prompt=user_prompt,

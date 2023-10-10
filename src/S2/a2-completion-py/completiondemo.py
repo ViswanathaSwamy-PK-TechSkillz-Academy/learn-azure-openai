@@ -1,29 +1,17 @@
-import openai
+import os
 import requests
 
 # Load config values
 from dotenv import dotenv_values
 config_details = dotenv_values(".env")
 
-# Setting up the deployment name
-deployment_name = config_details['COMPLETIONS_MODEL']
-
-# The base URL for your Azure OpenAI resource. e.g. "https://<your resource name>.openai.azure.com"
-openai.api_base = config_details['OPENAI_API_BASE']
-
-# The API key for your Azure OpenAI resource.
-openai.api_key = config_details["OPENAI_API_KEY"]
-# print(openai.api_key)
-
-# Currently OPENAI API have the following versions available: 2022-12-01. All versions follow the YYYY-MM-DD date structure.
-openai.api_version = config_details['OPENAI_API_VERSION']
-
 # Request URL
-api_url = f"{openai.api_base}/openai/deployments/{deployment_name}/completions?api-version={openai.api_version}"
-# print(api_url)
+api_url = f"{config_details['OPENAI_API_BASE']}/openai/deployments/{config_details['COMPLETIONS_MODEL']}/completions?api-version={config_details['OPENAI_API_VERSION']}"
 
 # Example prompt for request payload
 prompt = "Tell me two jokes on intelligent people"
+# prompt = "Give me a single-liner tweet for my 1001 dosa center homemade spices with love"
+# prompt = "Input: Please tell me two jokes on Software engineer"
 
 # Json payload
 # To know more about the parameters, checkout this documentation: https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference
@@ -35,7 +23,7 @@ json_data = {
 }
 
 # Including the api-key in HTTP headers
-headers = {"api-key": openai.api_key}
+headers = {"api-key": os.getenv("OPENAI_API_KEY")}
 
 try:
     # Request for creating a completion for the provided prompt and parameters
