@@ -1,49 +1,174 @@
 {
-  "info": {
-    "_postman_id": "d945ca54-4a16-41a2-986a-800581f013ae",
-    "name": "Completion",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "24752915"
-  },
-  "item": [
-    {
-      "name": "POST {{OPENAI_API_BASE}}/openai/deployments/{{COMPLETIONS_MODEL}}/completions?api-version={{OPENAI_API_VERSION}}",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "api-key",
-            "value": "{{OPENAI_API_KEY}}",
-            "type": "text"
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"prompt\": \"Inputs: \\n1. Which is the tallest building in the world \\n2. Which is the tallest building in Hyderabad\",\r\n  \"temperature\": 1,\r\n  \"top_p\": 0.5,\r\n  \"frequency_penalty\": 0,\r\n  \"presence_penalty\": 0,\r\n  \"max_tokens\": 90,\r\n  \"best_of\": 1,\r\n  \"stop\": null\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "{{OPENAI_API_BASE}}/openai/deployments/{{COMPLETIONS_MODEL}}/completions?api-version={{OPENAI_API_VERSION}}",
-          "host": ["{{OPENAI_API_BASE}}"],
-          "path": [
-            "openai",
-            "deployments",
-            "{{COMPLETIONS_MODEL}}",
-            "completions"
-          ],
-          "query": [
-            {
-              "key": "api-version",
-              "value": "{{OPENAI_API_VERSION}}"
-            }
-          ]
-        }
-      },
-      "response": []
-    }
-  ]
+	"info": {
+		"_postman_id": "d945ca54-4a16-41a2-986a-800581f013ae",
+		"name": "Completion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24752915"
+	},
+	"item": [
+		{
+			"name": "POST /openai/completions?api-version",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "{{OPENAI_API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"prompt\": \"Give me a single liner tweet for my 1001 dosa center home made spices with love\",\r\n    \"temperature\": 1,\r\n    \"top_p\": 0.5,\r\n    \"frequency_penalty\": 0,\r\n    \"presence_penalty\": 0,\r\n    \"max_tokens\": 200,\r\n    \"best_of\": 10,\r\n    \"stop\": null,\r\n    \"n\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{OPENAI_API_BASE}}/openai/deployments/{{COMPLETIONS_MODEL}}/completions?api-version={{OPENAI_API_VERSION}}",
+					"host": [
+						"{{OPENAI_API_BASE}}"
+					],
+					"path": [
+						"openai",
+						"deployments",
+						"{{COMPLETIONS_MODEL}}",
+						"completions"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{OPENAI_API_VERSION}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /OpenAI/GetCountryInfo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "{{OPENAI_API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"prompt\": \"Please give me the country_name, capital_state, national_bird, country_population for India in JSON format\",\r\n  \"temperature\": 1,\r\n  \"top_p\": 0.5,\r\n  \"frequency_penalty\": 0,\r\n  \"presence_penalty\": 0,\r\n  \"max_tokens\": 180,\r\n  \"best_of\": 1,\r\n  \"stop\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{OPENAI_API_BASE}}/openai/deployments/{{COMPLETIONS_MODEL}}/completions?api-version={{OPENAI_API_VERSION}}",
+					"host": [
+						"{{OPENAI_API_BASE}}"
+					],
+					"path": [
+						"openai",
+						"deployments",
+						"{{COMPLETIONS_MODEL}}",
+						"completions"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{OPENAI_API_VERSION}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /openai/Twitter_Captions",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "{{OPENAI_API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"prompt\": \"Input:Craft a playful and mouthwatering Twitter caption to promote our Dosa Center which makes 100 types of Dosas with homemade spices, organic paneer and butter\",\r\n  \"temperature\": 1,\r\n  \"top_p\": 0.5,\r\n  \"frequency_penalty\": 0,\r\n  \"presence_penalty\": 0,\r\n  \"max_tokens\": 100,\r\n  \"stop\": null,\r\n  \"best_of\": 5,\r\n  \"n\": 5,\r\n  \"echo\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{OPENAI_API_BASE}}/openai/deployments/{{COMPLETIONS_MODEL}}/completions?api-version={{OPENAI_API_VERSION}}",
+					"host": [
+						"{{OPENAI_API_BASE}}"
+					],
+					"path": [
+						"openai",
+						"deployments",
+						"{{COMPLETIONS_MODEL}}",
+						"completions"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{OPENAI_API_VERSION}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /openai/2 Jokes Prompt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "{{OPENAI_API_KEY}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"prompt\": \"Input: Please tell me two jokes on Software engineer\",\r\n  \"temperature\": 1,\r\n  \"top_p\": 0.5,\r\n  \"frequency_penalty\": 0,\r\n  \"presence_penalty\": 0,\r\n  \"max_tokens\": 180,\r\n  \"stop\": null,\r\n  \"best_of\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{OPENAI_API_BASE}}/openai/deployments/{{COMPLETIONS_MODEL}}/completions?api-version={{OPENAI_API_VERSION}}",
+					"host": [
+						"{{OPENAI_API_BASE}}"
+					],
+					"path": [
+						"openai",
+						"deployments",
+						"{{COMPLETIONS_MODEL}}",
+						"completions"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{OPENAI_API_VERSION}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
 }
