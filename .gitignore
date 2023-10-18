@@ -401,3 +401,4 @@ src/S2/a2-completion-pynb/.env
 completiondemovenv/
 src/S2/a2-completion-py/.env
 /src/S2/a3-completion-cs/CompletionDemo/CompletionDemo/appsettings.json
+/src/S3/a3-completion-cs/CompletionDemo/CompletionDemo/appsettings.json
