@@ -19,12 +19,15 @@ OpenAIClient client = new(new Uri(_configuration["CompletionConfiguration:OPEN_A
                             new AzureKeyCredential(Env.GetEnvironmentVariable("OPENAI_API_KEY")!));
 
 const string prompt = "What are the top 10 countries with highest populations are along with their population count and capital city : \n";
+var promptWithoutDesiredOutput = "What are the top 10 countries with highest populations are along with their population count and capital city : \n";
+var promptWithDesiredOutput = "Instructions: Please complete the below\n\nInput: \"\"\"What are the top 2 countries with highest populations are along with their population count and capital city :\"\"\"\n\nDesired Output: JSON Array \n\nOutput: \n";
+var promptWithDesiredOutput1 = "Instructions: Please complete the below\n\nInput: \"\"\"What are the top 2 countries with highest populations are along with their population count and capital city :\"\"\"\n\nDesired Output: XML \n\nOutput: \n";
 
 Response<Completions> completionsResponse = await client.GetCompletionsAsync(
     deploymentOrModelName: _configuration["CompletionConfiguration:ModelDeploymentName"]!,
     new CompletionsOptions()
     {
-        Prompts = { prompt },
+        Prompts = { prompt, promptWithoutDesiredOutput, promptWithDesiredOutput, promptWithDesiredOutput1 },
         Temperature = (float)1,
         MaxTokens = 120,
         NucleusSamplingFactor = (float)0.5,
