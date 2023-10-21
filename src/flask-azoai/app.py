@@ -1,8 +1,10 @@
 from datetime import datetime
-import os
+from flask import Flask, render_template, request
 import openai
-from flask import Flask, request, render_template
+import os
 from dotenv import dotenv_values
+
+app = Flask(__name__, static_url_path='/static')
 
 # Load config values
 config_details = dotenv_values(".env")
@@ -11,8 +13,6 @@ openai.api_type = "azure"
 openai.api_base = config_details['OPENAI_API_BASE']
 openai.api_version = config_details['OPENAI_API_VERSION']
 openai.api_key = os.getenv("OPENAI_API_KEY")
-
-app = Flask(__name__, static_url_path='/static')
 
 
 @app.route("/")
@@ -27,15 +27,16 @@ def get_api_welcome():
 
 @app.route("/api/get", methods=['GET'])
 def get_completion_response():
-    userText = request.args.get('msg')
-    print("User Text: ", userText)
-    response = generate_response(userText)
+    user_input = request.args.get('userinput')
+    print("User Text: ", user_input)
+    response = get_response_from_aoai(user_input)
+    print("Response Received from get_response_from_aoai() : ", response)
     return str(response)
 
 
-def generate_response(user_input):
-    # Include user input in the prompt
+def get_response_from_aoai(user_input):
     user_prompt = f"User Input: {user_input}\n\n"
+
     try:
         response = openai.Completion.create(
             engine=config_details['COMPLETIONS_MODEL'],
@@ -47,10 +48,12 @@ def generate_response(user_input):
             presence_penalty=0,
             stop=None
         )
+
+        print("AOAI Response: ", response)
         answer = response.choices[0].text
+
         return answer
     except Exception as e:
-        # Proper error handling and logging
         print("An exception has occurred:", str(e))
         return "An error occurred while processing the request."
 
