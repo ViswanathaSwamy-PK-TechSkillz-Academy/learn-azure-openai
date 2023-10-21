@@ -25,7 +25,7 @@ def get_api_welcome():
     return {"message": "Welcome to the Azure Open AI API", "status": "success", "processed_at": datetime.now()}
 
 
-@app.route("/api/get")
+@app.route("/api/get", methods=['GET'])
 def get_completion_response():
     userText = request.args.get('msg')
     print("User Text: ", userText)
