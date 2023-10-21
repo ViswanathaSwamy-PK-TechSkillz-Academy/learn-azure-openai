@@ -29,19 +29,17 @@
         rows="3"
         placeholder="Enter your input"
       ></textarea>
-      <button class="btn btn-primary mt-3 mb-3" onclick="generateResponse()">
+      <button class="btn btn-primary mt-3 mb-3" onclick="generateResponseFromAOAI()">
         Generate Response
       </button>
       <div class="panel panel-default mb-4">
         <div class="panel-heading title-styles">Current Response:</div>
-        <div id="response" class="shadow-sm bg-light rounded border border-primary mb-3 p-1 align-items-start">
-          <!-- <div id="response" class="align-text-top"></div>
-        </div> -->
+        <div id="current-response" class="shadow-sm bg-light rounded border border-primary mb-3 p-1 align-items-start">
       </div>
       <div class="panel panel-default mb-4">
         <div class="panel-heading title-styles">Chat Messages - History</div>
         <div class="panel-body" id="chat">
-          <ul class="list-group" id="chat-list"></ul>
+          <ul class="list-group" id="chat-messages-history"></ul>
         </div>
       </div>
     </div>
