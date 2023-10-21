@@ -1,3 +1,4 @@
+from datetime import datetime
 import os
 import openai
 from flask import Flask, request, render_template
@@ -17,6 +18,11 @@ app = Flask(__name__, static_url_path='/static')
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+@app.route("/api", methods=['GET'])
+def get_api_welcome():
+    return {"message": "Welcome to the Azure Open AI API", "status": "success", "processed_at": datetime.now()}
 
 
 @app.route("/api/get")
