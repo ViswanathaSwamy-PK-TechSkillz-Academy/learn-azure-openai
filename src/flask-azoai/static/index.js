@@ -13,14 +13,14 @@ function generateResponseFromAOAI() {
             data = processResponse(data);
 
             // Append the AI's response to the chat Messages History
-            chatMessagesHistory.innerHTML += `<li class="list-group-azoaiitem"><b>OpenAI:</b> ${data}</li>`;
+            chatMessagesHistory.innerHTML += `<li class="list-group-azoaiitem"><b>Azure Open AI:</b> ${data}</li>`;
             console.log("Success:", data);
             currentResponse.innerText = data;
         })
         .catch(error => {
             console.error("An error occurred:", error);
             currentResponse.innerText = "An error occurred while processing the request.";
-            chatMessagesHistory.innerHTML += `<li class="list-group-azoaiitem"><b>OpenAI:</b> An error occurred while processing the request.</li>`;
+            chatMessagesHistory.innerHTML += `<li class="list-group-azoaiitem"><b>Azure Open AI:</b> An error occurred while processing the request.</li>`;
         });
 }
 
