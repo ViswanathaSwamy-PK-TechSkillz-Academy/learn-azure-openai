@@ -9,7 +9,7 @@ public static class AzureOpenAIEndpoints
     {
         var group = routes.MapGroup(AzureOpenAiRoutes.Prefix).WithTags("AzureOpenAIEndpoints.API");
 
-        _ = group.MapGet(AzureOpenAiRoutes.Root, async ([FromQuery]string userInput) =>
+        _ = group.MapGet(AzureOpenAiRoutes.Root, async ([FromQuery] string userInput) =>
         {
             Task.CompletedTask.Wait();
 
