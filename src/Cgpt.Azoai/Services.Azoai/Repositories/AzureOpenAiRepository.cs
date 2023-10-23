@@ -7,7 +7,7 @@ public class AzureOpenAiRepository(IConfiguration configuration) : IAzureOpenAiR
 {
     private readonly IConfiguration _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
-    public async Task<IReadOnlyList<Choice>?> GetCompletionFromAzureOpenAI(string userInput)
+    public async Task<Response<Completions>> GetCompletionFromAzureOpenAI(string userInput)
     {
         OpenAIClient client = new(new Uri(_configuration["CompletionConfiguration:OPEN_API_EndPoint"]!),
                             new AzureKeyCredential(Env.GetEnvironmentVariable("OPENAI_API_KEY")!));
@@ -28,7 +28,7 @@ public class AzureOpenAiRepository(IConfiguration configuration) : IAzureOpenAiR
                 Echo = true
             });
 
-        return completionsResponse.Value?.Choices;
+        return completionsResponse;
     }
 
 }
