@@ -5,18 +5,19 @@ namespace Services.Azoai.Endpoints;
 public static class AzureOpenAIEndpoints
 {
 
-    public static void MapCountriesEndpoints(this IEndpointRouteBuilder routes)
+    public static void MapAzureOpenAIEndpoints(this IEndpointRouteBuilder routes)
     {
         var group = routes.MapGroup(AzureOpenAiRoutes.Prefix).WithTags("AzureOpenAIEndpoints.API");
 
-        _ = group.MapGet(AzureOpenAiRoutes.Root, async ([FromServices] ICountriesBusiness countriesBusiness) =>
+        _ = group.MapGet(AzureOpenAiRoutes.Root, async ([FromQuery]string userInput) =>
         {
-            return Results.Ok(await countriesBusiness.GetAllCountries());
+            Task.CompletedTask.Wait();
+
+            return Results.Ok("Response From Azure Open AI");
 
         })
           .AllowAnonymous()
-          .WithName("GetAllCountries")
-          .Produces<IReadOnlyCollection<CountryInfo>>(StatusCodes.Status200OK)
+          .WithName("GetAzureOpenAICompletion")
           .ProducesProblem(StatusCodes.Status500InternalServerError)
           .WithOpenApi();
     }

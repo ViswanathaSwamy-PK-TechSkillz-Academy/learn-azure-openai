@@ -22,6 +22,8 @@ public static class HttpRequestPipelineExtensions
 
         app.MapWelcomeEndpoints();
 
+        app.MapAzureOpenAIEndpoints();
+
         return app;
     }
 }
