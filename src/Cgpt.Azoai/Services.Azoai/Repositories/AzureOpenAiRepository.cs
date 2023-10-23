@@ -3,7 +3,7 @@ using Azure.AI.OpenAI;
 
 namespace Services.Azoai.Repositories;
 
-public class AzureOpenAiRepository(IConfiguration configuration)
+public class AzureOpenAiRepository(IConfiguration configuration) : IAzureOpenAiRepository
 {
     private readonly IConfiguration _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
 
