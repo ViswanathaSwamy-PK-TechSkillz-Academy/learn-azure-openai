@@ -8,12 +8,12 @@ public static class WelcomeEndpoints
 
         _ = routes
             .MapGet(WelcomeRoutes.Root, () => WelcomeMessage)
-            .WithTags("Countries.API")
+            .WithTags("Welcome.API")
             .WithName("GetRootWelcome");
 
         _ = routes
             .MapGet(WelcomeRoutes.Api, () => WelcomeMessage)
-            .WithTags("Countries.API")
+            .WithTags("Welcome.API")
             .WithName("GetApiWelcome");
     }
 
