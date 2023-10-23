@@ -22,6 +22,7 @@ public static class AzureOpenAIEndpoints
         })
           .AllowAnonymous()
           .WithName("GetAzureOpenAICompletion")
+          .Produces<Response<Completions>>(StatusCodes.Status200OK)
           .ProducesProblem(StatusCodes.Status500InternalServerError)
           .WithOpenApi();
     }
