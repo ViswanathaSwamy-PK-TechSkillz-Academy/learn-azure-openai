@@ -17,4 +17,8 @@
     <Folder Include="wwwroot\scripts\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Include="Services.Azoai.Common.Constants" Static="true"/>
+  </ItemGroup>
+  
 </Project>
