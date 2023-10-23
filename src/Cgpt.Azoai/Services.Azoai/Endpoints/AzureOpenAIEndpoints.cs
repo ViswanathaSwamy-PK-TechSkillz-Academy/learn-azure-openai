@@ -17,12 +17,11 @@ public static class AzureOpenAIEndpoints
 
             Response<Completions> completionResponse = await azureOpenAiRepository.GetCompletionFromAzureOpenAI(userInput);
 
-            return Results.Ok("Response From Azure Open AI");
-
+            return Results.Ok(completionResponse?.Value?.Choices[0].Text);
         })
           .AllowAnonymous()
           .WithName("GetAzureOpenAICompletion")
-          .Produces<Response<Completions>>(StatusCodes.Status200OK)
+          .Produces<string>(StatusCodes.Status200OK)
           .ProducesProblem(StatusCodes.Status500InternalServerError)
           .WithOpenApi();
     }
