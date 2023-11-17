@@ -21,7 +21,7 @@ OpenAIClient client = new(new Uri(_configuration["CompletionConfiguration:OPEN_A
 const string prompt = "What are the top 10 countries with highest populations are along with their population count and capital city : \n";
 var promptWithoutDesiredOutput = "What are the top 10 countries with highest populations are along with their population count and capital city : \n";
 var promptWithDesiredOutput = "Instructions: Please complete the below\n\nInput: \"\"\"What are the top 2 countries with highest populations are along with their population count and capital city :\"\"\"\n\nDesired Output: JSON Array \n\nOutput: \n";
-var promptWithDesiredOutput1 = "Instructions: Please complete the below\n\nInput: \"\"\"What are the top 2 countries with highest populations are along with their population count and capital city :\"\"\"\n\nDesired Output: XML \n\nOutput: \n";
+var promptWithDesiredOutput1 = "Instructions: Please complete the below\n\nInput: \"\"\"What are the top 4 countries with highest populations are along with their population count and capital city :\"\"\"\n\nDesired Output: XML \n\nOutput: \n";
 
 Response<Completions> completionsResponse = await client.GetCompletionsAsync(
     deploymentOrModelName: _configuration["CompletionConfiguration:ModelDeploymentName"]!,
