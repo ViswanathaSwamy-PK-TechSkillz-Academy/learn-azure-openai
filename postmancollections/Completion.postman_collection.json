@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"prompt\": \"Give me a single liner tweet for my 1001 dosa center home made spices with love\",\r\n    \"temperature\": 1,\r\n    \"top_p\": 0.5,\r\n    \"frequency_penalty\": 0,\r\n    \"presence_penalty\": 0,\r\n    \"max_tokens\": 200,\r\n    \"best_of\": 10,\r\n    \"stop\": null,\r\n    \"n\": 5\r\n}",
+					"raw": "{\r\n    \"prompt\": \"Give me a single-liner tweet for my 1001 dosa center homemade spices with love\",\r\n    \"temperature\": 1,\r\n    \"top_p\": 0.5,\r\n    \"frequency_penalty\": 0,\r\n    \"presence_penalty\": 0,\r\n    \"max_tokens\": 200,\r\n    \"best_of\": 10,\r\n    \"stop\": null,\r\n    \"n\": 5\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -101,7 +101,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"prompt\": \"Input:Craft a playful and mouthwatering Twitter caption to promote our Dosa Center which makes 100 types of Dosas with homemade spices, organic paneer and butter\",\r\n  \"temperature\": 1,\r\n  \"top_p\": 0.5,\r\n  \"frequency_penalty\": 0,\r\n  \"presence_penalty\": 0,\r\n  \"max_tokens\": 100,\r\n  \"stop\": null,\r\n  \"best_of\": 5,\r\n  \"n\": 5,\r\n  \"echo\": true\r\n}",
+					"raw": "{\r\n  \"prompt\": \"Input:Craft a playful and mouthwatering Twitter caption to promote our Dosa Center which makes 100 types of Dosas with homemade spices, organic paneer and butter\",\r\n  \"temperature\": 1,\r\n  \"top_p\": 0.5,\r\n  \"frequency_penalty\": 0,\r\n  \"presence_penalty\": 0,\r\n  \"max_tokens\": 100,\r\n  \"stop\": null,\r\n  \"best_of\": 1,\r\n  \"n\": 1,\r\n  \"echo\": false\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

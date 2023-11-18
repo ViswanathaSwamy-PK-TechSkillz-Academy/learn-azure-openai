@@ -1,12 +1,12 @@
 import os
 import requests
+from dotenv import dotenv_values
 
 # Load config values
-from dotenv import dotenv_values
 config_details = dotenv_values(".env")
 
 # Request URL
-api_url = f"{config_details['OPENAI_API_BASE']}/openai/deployments/{config_details['COMPLETIONS_MODEL']}/completions?api-version={config_details['OPENAI_API_VERSION']}"
+api_url = f"{config_details['OPENAI_API_BASE']}/openai/deployments/{config_details['OPENAI_ENGINE']}/completions?api-version={config_details['OPENAI_API_VERSION']}"
 
 # Example prompt for request payload
 prompt = "Tell me two jokes on intelligent people"
