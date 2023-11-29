@@ -1,4 +1,5 @@
 using Services.Azoai.Extensions;
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 

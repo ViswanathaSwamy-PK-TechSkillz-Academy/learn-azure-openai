@@ -7,6 +7,12 @@ public static class WelcomeEndpoints
         const string WelcomeMessage = "Minimal Countries.API. Please visit /swagger for full documentation";
 
         _ = routes
+            .MapGet("/liveness", () => { return "Alive"; })
+            .ShortCircuit()
+            .WithTags("HealthCheck.API")
+            .WithName("Liveness"); ;
+
+        _ = routes
             .MapGet(WelcomeRoutes.Root, () => WelcomeMessage)
             .WithTags("Welcome.API")
             .WithName("GetRootWelcome");

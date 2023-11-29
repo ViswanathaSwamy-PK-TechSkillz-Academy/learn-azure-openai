@@ -1,4 +1,5 @@
 ﻿using Services.Azoai.Endpoints;
+using System.Diagnostics;
 
 namespace Services.Azoai.Extensions;
 
@@ -19,6 +20,17 @@ public static class HttpRequestPipelineExtensions
         app.UseHttpsRedirection();
 
         app.UseStaticFiles();
+
+        app.Use(async (context, next) =>
+        {
+            // Executes at start of middleware pipeline for incoming request
+            Debugger.Break();
+
+            await next.Invoke();
+
+            // Executes at end of middleware pipeline for outgoing response
+            Debugger.Break();
+        });
 
         app.MapWelcomeEndpoints();
 
