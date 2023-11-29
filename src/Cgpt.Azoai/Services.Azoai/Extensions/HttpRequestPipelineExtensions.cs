@@ -34,6 +34,8 @@ public static class HttpRequestPipelineExtensions
 
         app.MapWelcomeEndpoints();
 
+        app.MapHealthCheckEndpoints();
+
         app.MapAzureOpenAIEndpoints();
 
         return app;
