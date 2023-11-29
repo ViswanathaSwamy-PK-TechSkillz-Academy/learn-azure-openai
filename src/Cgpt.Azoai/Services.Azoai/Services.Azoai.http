@@ -1,6 +1,19 @@
-@Services.Azoai_HostAddress = http://localhost:5028
+@Services.Azoai_HostAddress = https://localhost:7033
 
-GET {{Services.Azoai_HostAddress}}/weatherforecast/
+GET {{Services.Azoai_HostAddress}}
 Accept: application/json
 
 ###
+
+GET {{Services.Azoai_HostAddress}}/api
+Accept: application/json
+
+###
+
+GET {{Services.Azoai_HostAddress}}/liveness
+Accept: application/json
+
+###
+
+GET {{Services.Azoai_HostAddress}}/api/getcompletion?userInput=What is an Apple?
+Accept: application/json
