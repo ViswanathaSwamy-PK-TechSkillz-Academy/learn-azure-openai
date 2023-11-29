@@ -15,9 +15,9 @@ public class AzureOpenAiRepository(IConfiguration configuration) : IAzureOpenAiR
         string prompt = $"User Input: {userInput}\n";
 
         Response<Completions> completionsResponse = await client.GetCompletionsAsync(
-            deploymentOrModelName: _configuration["CompletionConfiguration:ModelDeploymentName"]!,
             new CompletionsOptions()
             {
+                DeploymentName = _configuration["CompletionConfiguration:ModelDeploymentName"]!,
                 Prompts = { prompt },
                 Temperature = (float)1,
                 MaxTokens = 120,
