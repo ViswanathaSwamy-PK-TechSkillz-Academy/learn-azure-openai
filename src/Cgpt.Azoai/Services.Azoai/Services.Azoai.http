@@ -4,3 +4,16 @@ GET {{Services.Azoai_HostAddress}}
 Accept: application/json
 
 ###
+
+GET {{Services.Azoai_HostAddress}}/api
+Accept: application/json
+
+###
+
+GET {{Services.Azoai_HostAddress}}/liveness
+Accept: application/json
+
+###
+
+GET {{Services.Azoai_HostAddress}}/api/getcompletion?userInput=What is an Apple?
+Accept: application/json

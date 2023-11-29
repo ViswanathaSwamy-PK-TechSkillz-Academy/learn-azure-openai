@@ -24,12 +24,12 @@ public static class HttpRequestPipelineExtensions
         app.Use(async (context, next) =>
         {
             // Executes at start of middleware pipeline for incoming request
-            Debugger.Break();
+            //Debugger.Break();
 
             await next.Invoke();
 
             // Executes at end of middleware pipeline for outgoing response
-            Debugger.Break();
+            //Debugger.Break();
         });
 
         app.MapWelcomeEndpoints();
