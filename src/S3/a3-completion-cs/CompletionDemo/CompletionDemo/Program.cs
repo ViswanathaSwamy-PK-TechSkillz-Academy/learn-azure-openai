@@ -24,9 +24,10 @@ var promptWithDesiredOutput = "Instructions: Please complete the below\n\nInput:
 var promptWithDesiredOutput1 = "Instructions: Please complete the below\n\nInput: \"\"\"What are the top 4 countries with highest populations are along with their population count and capital city :\"\"\"\n\nDesired Output: XML \n\nOutput: \n";
 
 Response<Completions> completionsResponse = await client.GetCompletionsAsync(
-    deploymentOrModelName: _configuration["CompletionConfiguration:ModelDeploymentName"]!,
+
     new CompletionsOptions()
     {
+        DeploymentName = _configuration["CompletionConfiguration:ModelDeploymentName"]!,
         Prompts = { prompt, promptWithoutDesiredOutput, promptWithDesiredOutput, promptWithDesiredOutput1 },
         Temperature = (float)1,
         MaxTokens = 120,
