@@ -1,5 +1,4 @@
 ﻿using Services.Azoai.Endpoints;
-using System.Diagnostics;
 
 namespace Services.Azoai.Extensions;
 
