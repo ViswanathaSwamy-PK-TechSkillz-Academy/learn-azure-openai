@@ -15,5 +15,6 @@ Accept: application/json
 
 ###
 
-GET {{Services.Azoai_HostAddress}}/api/getcompletion?userInput=What is an Apple?
+GET {{Services.Azoai_HostAddress}}/api/getcompletion?userInput=What%20is%20an%20apple?
 Accept: application/json
+
