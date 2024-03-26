@@ -11,3 +11,11 @@ npm init -y
 npm install @azure/openai
 npm install dotenv
 ```
+
+Note: We do not need `dotenv` we are passing the .evn file as part of the script inside package.json file
+
+```json
+"scripts": {
+    "s1": "node --env-file=.env ./src/index.js"
+}
+```
