@@ -8,4 +8,5 @@ This repository contains some sample projects which I am learning from different
 
 ```powershell
 npm init -y
+npm install @azure/openai
 ```
