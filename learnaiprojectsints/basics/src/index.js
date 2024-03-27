@@ -5,15 +5,25 @@ const azureApiKey = process.env["OPENAI_API_KEY"];
 
 const credential = new AzureKeyCredential(azureApiKey);
 
-const messages = [
-    { role: "system", content: "You are a helpful assistant." },
-    { role: "user", content: "Does Azure OpenAI support customer managed keys?" },
-    { role: "assistant", content: "Yes, customer managed keys are supported by Azure OpenAI" },
-    { role: "user", content: "Do other Azure AI services support this too" },
-];
-
 async function main() {
-    await showCompletionsDemo();
+    await showCompletionSamples();
+
+    await showChatCompletionsSample();
+}
+
+main().catch((err) => {
+    console.error("The sample encountered an error:", err);
+});
+
+export default { main };
+
+async function showChatCompletionsSample() {
+    const messages = [
+        { role: "system", content: "You are a helpful assistant." },
+        { role: "user", content: "Does Azure OpenAI support customer managed keys?" },
+        { role: "assistant", content: "Yes, customer managed keys are supported by Azure OpenAI" },
+        { role: "user", content: "Do other Azure AI services support this too" },
+    ];
 
     console.log("== Chat Completions Sample ==");
 
@@ -26,13 +36,8 @@ async function main() {
     }
 }
 
-main().catch((err) => {
-    console.error("The sample encountered an error:", err);
-});
+async function showCompletionSamples() {
 
-export default { main };
-
-async function showCompletionsDemo() {
     console.log("== Get completions Sample ==");
 
     const client = new OpenAIClient(endpoint, credential);
