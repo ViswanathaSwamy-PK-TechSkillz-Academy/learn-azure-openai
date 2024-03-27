@@ -1,4 +1,5 @@
 import { OpenAIClient, AzureKeyCredential, ChatRequestMessage } from "@azure/openai";
+import { encoding_for_model, get_encoding } from "tiktoken";
 
 const endpoint = process.env["AZURE_OPENAI_ENDPOINT"];
 const azureApiKey = process.env["OPENAI_API_KEY"];
@@ -14,6 +15,8 @@ async function main() {
     await showCompletionSamples();
 
     await showChatCompletionsSample();
+
+    await encodePrompt();
 }
 
 main().catch((err) => {
@@ -53,3 +56,20 @@ async function showCompletionSamples() {
         console.log(choice.text);
     }
 }
+
+// Reference: https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken
+async function encodePrompt() {
+    const prompt = "How are you today?"
+    const encoder = encoding_for_model('gpt-3.5-turbo');
+    const words = encoder.encode(prompt);
+    console.log("Encode Prompt: ", words)
+    console.log("Number of Tokens: ", words.length)
+
+    const encoding = get_encoding("cl100k_base")
+    const decodedBytes = encoding.decode(words);
+
+    // Convert bytes to string
+    const decodedPrompt = Buffer.from(decodedBytes).toString('utf-8');
+    console.log("Decoded Prompt: ", decodedPrompt);
+}
+
