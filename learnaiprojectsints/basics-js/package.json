@@ -3,19 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start-js": "node --env-file=.env src/index.js",
-    "start-ts": "node -r ts-node/register --env-file=.env src/index.ts"
+    "start": "node --env-file=.env src/index.js"
   },
   "keywords": [],
   "author": "Viswanatha Swamy P K",
   "license": "ISC",
   "dependencies": {
     "@azure/openai": "^1.0.0-beta.11"
-  },
-  "devDependencies": {
-    "@types/node": "^20.11.30",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.4.3"
   }
 }
