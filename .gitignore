@@ -405,3 +405,4 @@ src/S2/a2-completion-py/.env
 /src/S3/a3-completion-cs/CompletionDemo/CompletionDemo/appsettings.json
 /src/Cgpt.Azoai/Services.Azoai/appsettings.json
 /src/Cgpt.Azoai/Services.Azoai/appsettings.Development.json
+.env
