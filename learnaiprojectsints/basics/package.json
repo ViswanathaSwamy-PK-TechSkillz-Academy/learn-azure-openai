@@ -12,5 +12,10 @@
   "license": "ISC",
   "dependencies": {
     "@azure/openai": "^1.0.0-beta.11"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.3"
   }
 }
