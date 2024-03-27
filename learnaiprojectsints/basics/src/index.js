@@ -1,13 +1,12 @@
 import { OpenAIClient, AzureKeyCredential } from "@azure/openai";
 
-const endpoint = process.env["AZURE_OPENAI_ENDPOINT"];
-const azureApiKey = process.env["OPENAI_API_KEY"];
+const endpoint = process.env.AZURE_OPENAI_ENDPOINT;
+const azureApiKey = process.env.OPENAI_API_KEY;
 
 const credential = new AzureKeyCredential(azureApiKey);
 
 async function main() {
     await showCompletionSamples();
-
     await showChatCompletionsSample();
 }
 
@@ -37,7 +36,6 @@ async function showChatCompletionsSample() {
 }
 
 async function showCompletionSamples() {
-
     console.log("== Get completions Sample ==");
 
     const client = new OpenAIClient(endpoint, credential);

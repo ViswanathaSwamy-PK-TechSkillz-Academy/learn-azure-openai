@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start": "node --env-file=.env ./src/index.js"
+    "start-js": "node --env-file=.env src/index.js",
+    "start-ts": "node -r ts-node/register --env-file=.env src/index.ts"
   },
   "keywords": [],
   "author": "Viswanatha Swamy P K",
