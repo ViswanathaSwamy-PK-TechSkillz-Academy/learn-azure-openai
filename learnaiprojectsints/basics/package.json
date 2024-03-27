@@ -5,13 +5,12 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "s1": "node --env-file=.env ./src/index.js"
+    "start": "node --env-file=.env ./src/index.js"
   },
   "keywords": [],
   "author": "Viswanatha Swamy P K",
   "license": "ISC",
   "dependencies": {
-    "@azure/openai": "^1.0.0-beta.11",
-    "dotenv": "^16.4.5"
+    "@azure/openai": "^1.0.0-beta.11"
   }
 }
