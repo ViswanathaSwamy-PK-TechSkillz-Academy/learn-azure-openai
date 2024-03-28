@@ -1,0 +1,21 @@
+{
+  "name": "basics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node -r ts-node/register --env-file=.env src/index.ts"
+  },
+  "keywords": [],
+  "author": "Viswanatha Swamy P K",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/openai": "^1.0.0-beta.11",
+    "tiktoken": "^1.0.13"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.3"
+  }
+}
