@@ -4,6 +4,15 @@ This repository contains some sample projects which I am learning from different
 
 > 1. `OPENAI_API_KEY`
 
+## Basic Chat App
+
+```powershell
+npm init -y
+tsc --init
+npm i -D typescript ts-node @types/node
+npm install @azure/openai tiktoken
+```
+
 ## Basics
 
 **Note:**
@@ -12,7 +21,7 @@ This repository contains some sample projects which I am learning from different
 
 ```powershell
 npm init -y
-npm install @azure/openai
+npm install @azure/openai tiktoken
 npm install dotenv
 npm i -D typescript ts-node @types/node
 
