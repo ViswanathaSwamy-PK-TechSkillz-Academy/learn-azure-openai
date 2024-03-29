@@ -9,13 +9,15 @@ if (!endpoint || !azureApiKey) {
 }
 
 const credential = new AzureKeyCredential(azureApiKey);
-const client = new OpenAIClient(endpoint, credential);
+const openAiClient = new OpenAIClient(endpoint, credential);
 
-console.log("== Basic Chat Sample ==");
-console.log("Enter a message to chat with the AI model. Type 'quit' to exit.");
+console.log("\x1b[32m========== Basic Chat Sample ==========\x1b[0m");
+displayMessage();
 
 process.stdin.addListener('data', async function (input) {
     const userInput = input.toString().trim();
+
+    encodePrompt(userInput);
 
     const messages: ChatRequestMessage[] = [
         { role: 'system', content: 'You are a helpful chatbot' },
@@ -23,74 +25,46 @@ process.stdin.addListener('data', async function (input) {
     ];
 
     const deploymentId = "gpt-35-turbo";
-    const response = await client.getChatCompletions(deploymentId, messages);
+    const response = await openAiClient.getChatCompletions(deploymentId, messages);
 
-    console.log(response?.choices[0]?.message?.content)
+    // \x1b[35m$
+    console.log(`\x1b[36m${response?.choices[0]?.message?.content}\x1b[0m`);
 
-    if(userInput === 'quit') {
+    if (userInput === 'quit') {
         process.exit(0);
     }
+
+    displayMessage();
 })
 
-// async function main() {
-//     await showCompletionSamples();
 
-//     await showChatCompletionsSample();
+// Reference: https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken
+async function encodePrompt(prompt: string) {
+    // const prompt = "How are you today?"
+    const encoder = encoding_for_model('gpt-3.5-turbo');
+    const words = encoder.encode(prompt);
+    // console.log("Encode Prompt: ", words)
+    // console.log("Number of Tokens: ", words.length)
 
-//     await encodePrompt();
-// }
+    const encoding = get_encoding("cl100k_base")
+    const decodedBytes = encoding.decode(words);
 
-// main().catch((err) => {
-//     console.error("The sample encountered an error:", err);
-// });
+    // Convert bytes to string
+    const decodedPrompt = Buffer.from(decodedBytes).toString('utf-8');
+    // console.log("Decoded Prompt: ", decodedPrompt);
+}
 
-// export default { main };
+async function displayMessage() {
+    console.log("\n\x1b[33mEnter a message to chat with the AI model. Type 'quit' to exit.\x1b[0m"); // Yellow color for instruction
+}
 
-// async function showChatCompletionsSample() {
-//     const messages: ChatRequestMessage[] = [
-//         { role: "system", content: "You are a helpful assistant." },
-//         { role: "user", content: "Does Azure OpenAI support customer managed keys?" },
-//         { role: "assistant", content: "Yes, customer managed keys are supported by Azure OpenAI" },
-//         { role: "user", content: "Do other Azure AI services support this too" },
-//     ];
-
-//     console.log("== Chat Completions Sample ==");
-
-//     const deploymentId = "gpt-35-turbo";
-//     const result = await client.getChatCompletions(deploymentId, messages);
-
-//     for (const choice of result.choices) {
-//         console.log(choice.message);
-//     }
-// }
-
-// async function showCompletionSamples() {
-
-//     console.log("== Get completions Sample ==");
-
-//     const deploymentId = "text-davinci-003-dev-0109";
-//     const prompt = "What is an apple?";
-
-//     const result = await client.getCompletions(deploymentId, [prompt]);
-
-//     for (const choice of result.choices) {
-//         console.log(choice.text);
-//     }
-// }
-
-// // Reference: https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken
-// async function encodePrompt() {
-//     const prompt = "How are you today?"
-//     const encoder = encoding_for_model('gpt-3.5-turbo');
-//     const words = encoder.encode(prompt);
-//     console.log("Encode Prompt: ", words)
-//     console.log("Number of Tokens: ", words.length)
-
-//     const encoding = get_encoding("cl100k_base")
-//     const decodedBytes = encoding.decode(words);
-
-//     // Convert bytes to string
-//     const decodedPrompt = Buffer.from(decodedBytes).toString('utf-8');
-//     console.log("Decoded Prompt: ", decodedPrompt);
-// }
-
+// Color codes for console output
+// \x1b[31m Red
+// \x1b[32m Green
+// \x1b[33m Yellow
+// \x1b[34m Blue
+// \x1b[35m Magenta
+// \x1b[36m Cyan
+// \x1b[37m White
+// \x1b[90m Gray
+// \x1b[0m Reset color
