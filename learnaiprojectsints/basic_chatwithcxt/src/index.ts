@@ -10,6 +10,19 @@ if (!endpoint || !azureApiKey) {
 
 const credential = new AzureKeyCredential(azureApiKey);
 const openAiClient = new OpenAIClient(endpoint, credential);
+const deploymentId = "gpt-35-turbo";
+
+const chatRequestMessages: ChatRequestMessage[] = [
+    { role: 'system', content: 'You are a helpful chatbot' }
+];
+
+async function createChatCompletion() {
+    const response = await openAiClient.getChatCompletions(deploymentId, chatRequestMessages);
+    const responseMessage = response?.choices[0]?.message;
+    chatRequestMessages.push({ role: 'assistant', content: responseMessage?.content! });
+
+    console.log(`\x1b[36m${response?.choices[0]?.message?.role}: ${response?.choices[0]?.message?.content}\x1b[0m`);
+}
 
 console.log("\x1b[32m========== Basic Chat Sample ==========\x1b[0m");
 displayMessage();
@@ -19,16 +32,11 @@ process.stdin.addListener('data', async function (input) {
 
     encodePrompt(userInput);
 
-    const messages: ChatRequestMessage[] = [
-        { role: 'system', content: 'You are a helpful chatbot' },
-        { role: 'user', content: userInput },
-    ];
+    chatRequestMessages.push({ role: 'user', content: userInput });
 
-    const deploymentId = "gpt-35-turbo";
-    const response = await openAiClient.getChatCompletions(deploymentId, messages);
-
+    await createChatCompletion();
     // \x1b[35m$
-    console.log(`\x1b[36m${response?.choices[0]?.message?.content}\x1b[0m`);
+    // console.log(`\x1b[36m${response?.choices[0]?.message?.content}\x1b[0m`);
 
     if (userInput === 'quit') {
         process.exit(0);
