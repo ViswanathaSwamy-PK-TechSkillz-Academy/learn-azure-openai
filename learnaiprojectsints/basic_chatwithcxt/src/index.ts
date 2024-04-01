@@ -24,7 +24,7 @@ async function createChatCompletion() {
     chatRequestMessages.push({ role: 'assistant', content: responseMessage?.content! });
 
     if (response.usage && response.usage.totalTokens > MAX_TOKENS) {
-        console.log(`\x1b[31mCurrent tokens are ${response.usage.totalTokens}. Deleting the older messages ... \x1b[0m`);
+        console.log(`\x1b[31mSystem: Current tokens are ${response.usage.totalTokens}. Deleting the older messages ... \x1b[0m`);
 
         deleteOlderMessages();
     }
@@ -34,7 +34,8 @@ async function createChatCompletion() {
     // console.log(`\x1b[43mInfo :: Current tokens are ${response?.usage?.totalTokens} and Max Tokens: ${MAX_TOKENS}. \x1b[0m`);
     // console.log(`\x1b[35mInfo :: Current tokens are ${response?.usage?.totalTokens}. \x1b[0m`);
     // console.log(`\x1b[38;5;217mInfo :: Current Tokens: ${response?.usage?.totalTokens} :: Max Tokens: ${MAX_TOKENS}. \x1b[0m`);
-    console.log(`\x1b[38;5;131m\x1b[48;5;252mInfo :: Current Tokens: ${response?.usage?.totalTokens} :: Max Tokens: ${MAX_TOKENS}. \x1b[0m`);
+    // console.log(`\x1b[38;5;131m\x1b[48;5;252mInfo :: Current Tokens: ${response?.usage?.totalTokens} :: Max Tokens: ${MAX_TOKENS}. \x1b[0m`);
+    console.log(`\x1b[38;5;131mSystem Info :: Current Tokens: ${response?.usage?.totalTokens} :: Max Tokens: ${MAX_TOKENS}. \x1b[0m`);
 }
 
 console.log("\x1b[32m========== Basic Chat Sample ==========\x1b[0m");
@@ -44,7 +45,7 @@ process.stdin.addListener('data', async function (input) {
     const userInput = input.toString().trim();
 
     if (userInput?.toLowerCase() === 'quit') {
-        console.log(`\x1b[36mThank You for using Chat Application. Please Visit us again !!!\n\n\x1b[0m`);
+        console.log(`\x1b[36mSystem: Thank You for using Chat Application. Please Visit us again !!!\n\n\x1b[0m`);
         process.exit(0);
     }
 
@@ -59,7 +60,8 @@ process.stdin.addListener('data', async function (input) {
 
 
 async function displayMessage() {
-    console.log("\n\x1b[33mEnter a message to chat with the AI model. Type 'quit' to exit.\x1b[0m"); // Yellow color for instruction
+    console.log("\n\x1b[33mSystem: Enter a message to chat with the AI model. Type 'quit' to exit.\x1b[0m"); // Yellow color for instruction
+    process.stdout.write('User: ');
 }
 
 function deleteOlderMessages() {
