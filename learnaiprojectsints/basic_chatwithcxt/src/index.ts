@@ -30,17 +30,16 @@ displayMessage();
 process.stdin.addListener('data', async function (input) {
     const userInput = input.toString().trim();
 
+    if (userInput?.toLowerCase() === 'quit') {
+        console.log(`\x1b[36mThank You for using Chat Application. Please Visit us again !!!\n\n\x1b[0m`);
+        process.exit(0);
+    }
+
     encodePrompt(userInput);
 
     chatRequestMessages.push({ role: 'user', content: userInput });
 
     await createChatCompletion();
-    // \x1b[35m$
-    // console.log(`\x1b[36m${response?.choices[0]?.message?.content}\x1b[0m`);
-
-    if (userInput === 'quit') {
-        process.exit(0);
-    }
 
     displayMessage();
 })
