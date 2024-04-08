@@ -110,4 +110,6 @@ async function encodePrompt(prompt: string) {
 
     // Convert bytes to string
     const decodedPrompt = Buffer.from(decodedBytes).toString('utf-8');
+
+    return decodedPrompt;
 }
