@@ -1,22 +1,16 @@
-import { OpenAIClient, AzureKeyCredential, ChatRequestMessage } from "@azure/openai";
-import { encoding_for_model, get_encoding } from "tiktoken";
+import { OpenaiClient } from "./api/openaiClient";
+import { encodePrompt } from "./utils/encodingUtils";
+import { AzureConfig } from "./constants/azureConfig";
+import { MAX_TOKENS } from "./constants/chatConstants";
+import { ChatRequestMessage } from "@azure/openai";
 
-const endpoint = process.env["AZURE_OPENAI_ENDPOINT"];
-const azureApiKey = process.env["OPENAI_API_KEY"];
-
-if (!endpoint || !azureApiKey) {
+if (!AzureConfig.endpoint || !AzureConfig.apiKey) {
     throw new Error("Azure endpoint or OpenAI API key is not defined.");
 }
 
-const credential = new AzureKeyCredential(azureApiKey);
-const openAiClient = new OpenAIClient(endpoint, credential);
+const openAiClient = new OpenaiClient(AzureConfig.endpoint, AzureConfig.apiKey);
 const deploymentId = "gpt-35-turbo";
-const encoder = encoding_for_model('gpt-3.5-turbo');
-const MAX_TOKENS = Number(process.env["MAX_TOKENS"]);
-
-const chatRequestMessages: ChatRequestMessage[] = [
-    { role: 'system', content: 'You are a helpful chatbot' }
-];
+const chatRequestMessages: ChatRequestMessage[] = [{ role: 'system', content: 'You are a helpful chatbot' }];
 
 async function createChatCompletion() {
     const response = await openAiClient.getChatCompletions(deploymentId, chatRequestMessages);
@@ -32,32 +26,6 @@ async function createChatCompletion() {
     console.log(`\x1b[36m${response?.choices[0]?.message?.role}: ${response?.choices[0]?.message?.content}\x1b[0m`);
 
     console.log(`\x1b[38;5;230mSystem Info :: Current Tokens: ${response?.usage?.totalTokens} :: Max Tokens: ${MAX_TOKENS}. \x1b[0m`);
-}
-
-console.log("\x1b[32m========== Basic Chat Sample ==========\x1b[0m");
-displayMessage();
-
-process.stdin.addListener('data', async function (input) {
-    const userInput = input.toString().trim();
-
-    if (userInput?.toLowerCase() === 'quit') {
-        console.log(`\x1b[36mSystem: Thank You for using Chat Application. Please Visit us again !!!\n\n\x1b[0m`);
-        process.exit(0);
-    }
-
-    encodePrompt(userInput);
-
-    chatRequestMessages.push({ role: 'user', content: userInput });
-
-    await createChatCompletion();
-
-    displayMessage();
-})
-
-
-async function displayMessage() {
-    console.log("\n\x1b[33mSystem: Enter a message to chat with the AI model. Type 'quit' to exit.\x1b[0m"); // Yellow color for instruction
-    process.stdout.write('User: ');
 }
 
 function deleteOlderMessages() {
@@ -82,11 +50,11 @@ function getContextLength() {
 
     chatRequestMessages.forEach((message: ChatRequestMessage) => {
         if (typeof message.content == 'string') {
-            length += encoder.encode(message.content).length;
+            length += encodePrompt(message.content).length;
         } else if (Array.isArray(message.content)) {
             message.content.forEach((messageContent) => {
                 if (messageContent.type == 'text') {
-                    length += encoder.encode(messageContent.text).length;
+                    length += encodePrompt(messageContent.text).length;
                 }
             })
         }
@@ -95,22 +63,27 @@ function getContextLength() {
     return length
 }
 
-// Reference: https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken
-async function encodePrompt(prompt: string) {
-    // const prompt = "How are you today?"
-    const encoder = encoding_for_model('gpt-3.5-turbo');
-    const words = encoder.encode(prompt);
+async function main() {
+    console.log("\x1b[32m========== Basic Chat Sample ==========\x1b[0m");
+    console.log("\n\x1b[33mSystem: Enter a message to chat with the AI model. Type 'quit' to exit.\x1b[0m"); // Yellow color for instruction
+    process.stdout.write('User: ');
 
-    const encoding = get_encoding("cl100k_base")
-    const decodedBytes = encoding.decode(words);
+    process.stdin.addListener('data', async function (input) {
+        const userInput = input.toString().trim();
 
-    // Convert bytes to string
-    const decodedPrompt = Buffer.from(decodedBytes).toString('utf-8');
+        if (userInput?.toLowerCase() === 'quit') {
+            console.log(`\x1b[36mSystem: Thank You for using Chat Application. Please Visit us again !!!\n\n\x1b[0m`);
+            process.exit(0);
+        }
 
-    return decodedPrompt;
+        chatRequestMessages.push({ role: 'user', content: userInput });
+
+        await createChatCompletion();
+
+        console.log("\n\x1b[33mSystem: Enter a message to chat with the AI model. Type 'quit' to exit.\x1b[0m"); // Yellow color for instruction
+        process.stdout.write('User: ');
+    });
 }
 
-// console.log(`\x1b[43mInfo :: Current tokens are ${response?.usage?.totalTokens} and Max Tokens: ${MAX_TOKENS}. \x1b[0m`);
-// console.log(`\x1b[35mInfo :: Current tokens are ${response?.usage?.totalTokens}. \x1b[0m`);
-// console.log(`\x1b[38;5;217mInfo :: Current Tokens: ${response?.usage?.totalTokens} :: Max Tokens: ${MAX_TOKENS}. \x1b[0m`);
-// console.log(`\x1b[38;5;131m\x1b[48;5;252mInfo :: Current Tokens: ${response?.usage?.totalTokens} :: Max Tokens: ${MAX_TOKENS}. \x1b[0m`);
+main();
+
