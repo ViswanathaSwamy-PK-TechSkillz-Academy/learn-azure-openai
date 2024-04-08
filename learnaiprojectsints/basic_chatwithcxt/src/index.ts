@@ -31,11 +31,7 @@ async function createChatCompletion() {
 
     console.log(`\x1b[36m${response?.choices[0]?.message?.role}: ${response?.choices[0]?.message?.content}\x1b[0m`);
 
-    // console.log(`\x1b[43mInfo :: Current tokens are ${response?.usage?.totalTokens} and Max Tokens: ${MAX_TOKENS}. \x1b[0m`);
-    // console.log(`\x1b[35mInfo :: Current tokens are ${response?.usage?.totalTokens}. \x1b[0m`);
-    // console.log(`\x1b[38;5;217mInfo :: Current Tokens: ${response?.usage?.totalTokens} :: Max Tokens: ${MAX_TOKENS}. \x1b[0m`);
-    // console.log(`\x1b[38;5;131m\x1b[48;5;252mInfo :: Current Tokens: ${response?.usage?.totalTokens} :: Max Tokens: ${MAX_TOKENS}. \x1b[0m`);
-    console.log(`\x1b[38;5;131mSystem Info :: Current Tokens: ${response?.usage?.totalTokens} :: Max Tokens: ${MAX_TOKENS}. \x1b[0m`);
+    console.log(`\x1b[38;5;230mSystem Info :: Current Tokens: ${response?.usage?.totalTokens} :: Max Tokens: ${MAX_TOKENS}. \x1b[0m`);
 }
 
 console.log("\x1b[32m========== Basic Chat Sample ==========\x1b[0m");
@@ -113,3 +109,8 @@ async function encodePrompt(prompt: string) {
 
     return decodedPrompt;
 }
+
+// console.log(`\x1b[43mInfo :: Current tokens are ${response?.usage?.totalTokens} and Max Tokens: ${MAX_TOKENS}. \x1b[0m`);
+// console.log(`\x1b[35mInfo :: Current tokens are ${response?.usage?.totalTokens}. \x1b[0m`);
+// console.log(`\x1b[38;5;217mInfo :: Current Tokens: ${response?.usage?.totalTokens} :: Max Tokens: ${MAX_TOKENS}. \x1b[0m`);
+// console.log(`\x1b[38;5;131m\x1b[48;5;252mInfo :: Current Tokens: ${response?.usage?.totalTokens} :: Max Tokens: ${MAX_TOKENS}. \x1b[0m`);
